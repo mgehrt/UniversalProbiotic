@@ -58,10 +58,10 @@ namespace UniversalProbiotic.Controllers
                     p = db.Products.Where(m => m.Species.Equals("Equine")).FirstOrDefault();
                     break;
                 case 5:
-                    p = db.Products.Where(m => m.Species.Equals("Poultry")).FirstOrDefault();
+                    p = db.Products.Where(m => m.Species.Equals("Swine")).FirstOrDefault();
                     break;
                 case 6:
-                    p = db.Products.Where(m => m.Species.Equals("Swine")).FirstOrDefault();
+                    p = db.Products.Where(m => m.Species.Equals("Poultry")).FirstOrDefault();
                     break;
                 default:
                     p = db.Products.Where(m => m.Species.Equals("Bovine")).FirstOrDefault();

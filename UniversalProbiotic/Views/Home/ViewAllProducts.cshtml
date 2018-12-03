@@ -1,35 +1,34 @@
 ﻿@model IList<UniversalProbiotic.Models.Product>
 @{
     ViewBag.Title = "ViewAllProducts";
-    int counter = 0;
 }
 
 <div class="row">
-    <h4 class="card-title text-center p-2 display-4" style="font-size:1.5rem!important;">Our Products</h4>
-    <hr />
+    <h4 class="text-center mt-3 p-2 mb-0 display-4" style="font-size:1.5rem!important;">Our Products</h4>
 </div>
+<hr class="mt-0" />
 <div class="col-lg-12">
     @foreach (var item in from i in Model.Select((value, index) => new { value, index }) group i.value by i.index / 3 into g select g)
     {
-        <div class="row">
-
-            @foreach (var product in item)
-            {
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="card-title">@product.Name</div>
-                        <div class="card-img-top">
-                            <img src="@Url.Action("GetImage", new {  id = product.ProductID})" />
-                        </div>
+        <div class="row mb-3">
+            <div class="card-deck">
+                @foreach (var product in item)
+                {
+                <div class="card">
+                    <div class="card-title display-4 text-center" style="font-size:.95rem!important;">@product.Name</div>
+                    <hr class="mx-3 mt-0" />
+                    <div class="card-img-top">
+                        <img src="@Url.Action("GetImage", new { id = product.ProductID })" class="img-fluid" />
                     </div>
+                    <hr class="mx-3 my-0" />
+                    <form class="form-inline p-3 align-content-center">
+                        @Html.ActionLink("View Details", "Home", new { id = product.ProductID }, new { @class = "btn btn-sm btn-outline-secondary" })
+                        @Html.ActionLink("Add to Cart", "Home", new { id = product.ProductID }, new { @class = "btn btn-sm btn-outline-secondary" })
+                    </form>
+
                 </div>
-            }
-
-
-
-
-
-
+                }
+            </div>
         </div>
     }
 </div>
