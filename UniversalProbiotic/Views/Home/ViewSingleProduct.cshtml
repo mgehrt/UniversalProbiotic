@@ -1,0 +1,8 @@
+﻿@model UniversalProbiotic.Models.Product
+@{
+    ViewBag.Title = "ViewSingleProduct";
+}
+
+<h2>ViewSingleProduct</h2>
+
+@Html.ActionLink("UploadImage", "UploadImages", "Home", new {  id = Model.ProductID}, new {  @class = "btn btn-primary"})

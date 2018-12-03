@@ -32,15 +32,15 @@
                 <li class="nav-item dropdown" style="z-index:999;">
                     <a class="nav-link dropdown-toggle" style="z-index:999;" href="#" id="navbarDrop" data-toggle="dropdown">Products</a>
                     <div class="dropdown-menu " style="z-index:999;">
-                        <a class="dropdown-item" href="#">Dogs</a>
-                        <a class="dropdown-item" href="#">Cats</a>
-                        <a class="dropdown-item" href="#">Cattle</a>
-                        <a class="dropdown-item" href="#">Goats</a>
-                        <a class="dropdown-item" href="#">Horses</a>
-                        <a class="dropdown-item" href="#">Chickens and Turkeys</a>
-                        <a class="dropdown-item" href="#">Pigs</a>
+                        @Html.ActionLink("Dogs", "ViewSingleProduct", "Home", new { id = 1 }, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Cats", "ViewSingleProduct", "Home", new { id = 2 }, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Goats", "ViewSingleProduct", "Home", new { id = 3 }, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Horses", "ViewSingleProduct", "Home", new { id = 4 }, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Pigs", "ViewSingleProduct", "Home", new { id = 5 }, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Chickens and Turkeys", "ViewSingleProduct", "Home", new { id = 6 }, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Cows", "ViewSingleProduct", "Home", new { id = 7 }, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">View All</a>
+                        @Html.ActionLink("View All", "ViewAllProducts", "Home", null, new { @class = "dropdown-item" })
                     </div>
                 </li>
             </ul>
