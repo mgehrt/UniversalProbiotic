@@ -18,5 +18,7 @@ namespace UniversalProbiotic.Models
         public string PictureType { get; set; }
 
         public byte[] PictureData { get; set; }
+
+        public int QuantityForCart { get; set; }
     }
 }

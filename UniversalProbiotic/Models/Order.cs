@@ -15,7 +15,7 @@ namespace UniversalProbiotic.Models
 
         public decimal OrderTotal { get; set; }
 
-        
+        public virtual Product Product { get; set; }
 
     }
 }

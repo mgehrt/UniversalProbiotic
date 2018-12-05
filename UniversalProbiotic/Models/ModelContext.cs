@@ -11,6 +11,6 @@ namespace UniversalProbiotic.Models
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Billing> Billings { get; set; }
-
+        public DbSet<Cart> Cart { get; set; }
     }
 }

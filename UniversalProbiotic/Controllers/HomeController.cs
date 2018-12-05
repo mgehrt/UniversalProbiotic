@@ -67,7 +67,7 @@ namespace UniversalProbiotic.Controllers
                     p = db.Products.Where(m => m.Species.Equals("Bovine")).FirstOrDefault();
                     break;
             }
-            
+
             return View(p);
         }
 
@@ -84,7 +84,7 @@ namespace UniversalProbiotic.Controllers
             Product p = db.Products.Find(product.ProductID);
             if (ModelState.IsValid)
             {
-                if(image != null)
+                if (image != null)
                 {
                     p.PictureType = image.ContentType;
                     p.PictureData = new byte[image.ContentLength];
@@ -98,6 +98,59 @@ namespace UniversalProbiotic.Controllers
                 return View(p);
             }
         }
+
+        public ActionResult AddCart(int id, int quantity)
+        {
+            
+            Product p = db.Products.Find(id);
+            
+            
+            Order order = new Order
+            {
+                ProductID = id,
+                OrderQuantity = quantity,
+                OrderTotal = p.Price * quantity,
+                Product = p
+            };
+            if (Session["cart"] == null)
+            {
+                //Cart does not exist (assumed first order)
+                List<Order> cart = new List<Order>();
+                cart.Add(order);
+                Session["cart"] = cart;
+                return RedirectToAction("ViewCart");
+            }
+            else
+            {
+                //Cart already exists
+                List<Order> cart = (List<Order>)Session["cart"];
+                foreach (Order o in cart)
+                {
+                    //the product is already in the cart so we update the quantity and total
+                    if (o.ProductID == id)
+                    {
+                        o.OrderQuantity += quantity;
+                        o.OrderTotal += (p.Price * quantity);
+                        //no need to keep searching
+                        return RedirectToAction("ViewCart");
+                    }
+                }
+                //Cart exists, but a new product is being added
+                cart.Add(order);
+                Session["cart"] = cart;
+                return RedirectToAction("ViewCart");
+            }
+            db.Orders.Add(order);
+            db.SaveChanges();
+
+            return RedirectToAction("ViewCart");
+        }
+
+        public ActionResult ViewCart()
+        {
+            return View();
+        }
+
 
         public FileContentResult GetImage(int id)
         {
