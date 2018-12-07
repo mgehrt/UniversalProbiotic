@@ -23,7 +23,7 @@
                     <hr class="mx-3 my-0" />
                     <form class="form-inline p-3">
                         <div class="col-md-6">@Html.ActionLink("View Details", "ViewSingleProduct", "Home", new { id = product.ProductID }, new { @class = "btn btn-sm btn-outline-secondary btn-block" })</div>
-                        <div class="col-md-6">@Html.ActionLink("Add to Cart", "Home", new { id = product.ProductID, quantity = 1 }, new { @class = "btn btn-sm btn-outline-secondary btn-block" })</div>
+                        <div class="col-md-6">@Html.ActionLink("Add to Cart", "AddCart","Home", new { id = product.ProductID, quantity = 1 }, new { @class = "btn btn-sm btn-outline-secondary btn-block" })</div>
                     </form>
 
                 </div>

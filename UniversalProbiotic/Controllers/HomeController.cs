@@ -112,6 +112,8 @@ namespace UniversalProbiotic.Controllers
                 OrderTotal = p.Price * quantity,
                 Product = p
             };
+            db.Orders.Add(order);
+            db.SaveChanges();
             if (Session["cart"] == null)
             {
                 //Cart does not exist (assumed first order)
@@ -159,6 +161,24 @@ namespace UniversalProbiotic.Controllers
 
         }
 
+        
+        public ActionResult RemoveItem (int id)
+        {
+            List<Order> cart = (List<Order>)Session["cart"];
+            int index = 0 ;
+            foreach(var item in cart)
+            {
+                if (item.OrderID == id)
+                {
+                    index = cart.IndexOf(item);
+                    break;
+                }
+            }
+            cart.RemoveAt(index);
+            Session["cart"] = cart;
+            return RedirectToAction("ViewCart");
+
+        }
 
     }
 }

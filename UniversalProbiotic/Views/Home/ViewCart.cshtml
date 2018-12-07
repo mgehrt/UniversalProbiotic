@@ -1,7 +1,12 @@
 ﻿
 @{
+    /**/
+
     ViewBag.Title = "ViewCart";
     decimal PurchaseTotal = 0;
+    List<Order> CartCheck = ((List<Order>)Session["cart"] ?? new List<Order>());
+    bool isEmpty = !CartCheck.Any();
+
 }
 @using UniversalProbiotic.Models
 
@@ -9,47 +14,92 @@
     <h4 class="text-center mt-3 p-2 mb-0 display-4" style="font-size:1.5rem!important;">Your Cart</h4>
 </div>
 <hr class="mt-0" />
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-title text-center">
-                Cart Items
-            </div>
-            <hr class="mx-3 mt-0" />
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Subtotal</th>
-                        <th></th>
+@if (!isEmpty)
+{
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-title text-center">
+                    Cart Items
+                </div>
+                <hr class="mx-3 mt-0" />
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in (List<Order>)Session["cart"])
+                    {
+                        PurchaseTotal += item.OrderTotal;
+                        <tr class="text-center mt-3 p-2 mb-0 display-4" style="font-size:.95rem!important;">
+                            <td>
+                                @item.Product.Name
+                            </td>
+                            <td>
+                                @item.OrderQuantity
+                            </td>
+                            <td>
+                                $@item.OrderTotal
+                            </td>
+                            <td class="align-items-center">
+                                @Html.ActionLink("Remove", "RemoveItem", "Home", new { id = item.OrderID }, null)
+                            </td>
+                        </tr>
+                    }
+
+                    <tr class="pt-4">
+                        <td class="pt-4"></td>
+                        <td class="pt-4"></td>
+                        <td class="pt-4">
+                            <b>Total:</b>
+                            $@PurchaseTotal
+                        </td>
+                        <td class="pt-3" align="center">
+                            @Html.ActionLink("Purchase", "", "", new { @class = "btn btn-outline-secondary btn-sm text-center" })
+                        </td>
                     </tr>
-                </thead>
-                @foreach (var item in (List<Order>)Session["cart"])
-                {
-                    PurchaseTotal += item.OrderTotal;
-                <tr class="text-center mt-3 p-2 mb-0 display-4" style="font-size:.95rem!important;">
-                    <td>
-                        @item.Product.Name
-                    </td>
-                    <td>
-                        @item.OrderQuantity
-                    </td>
-                    <td>
-                        $@item.OrderTotal
-                    </td>
-                    <td>
-                        @Html.ActionLink("Remove", "RemoveFromCart", "Home", new { id = item.OrderID }, null)
-                    </td>
-                </tr>
-                }
-            </table>
-            <hr class="mx-3 mt-0" />
-            
-            @PurchaseTotal
-</div>
+                </table>
+
+            </div>
+        </div>
+        <div class="col-md-2"></div>
     </div>
-    <div class="col-md-2"></div>
-</div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-title text-center">
+                    Cart Items
+                </div>
+                <hr class="mx-3 mt-0" />
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Your cart is empty. Add a product to get started!
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+}
 

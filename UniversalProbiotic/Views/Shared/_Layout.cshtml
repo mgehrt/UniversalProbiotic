@@ -12,7 +12,7 @@
     @RenderSection("scripts", required: false)
 </head>
 <body class="pt-0">
-    <nav class="navbar navbar-expand-lg position-sticky navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg position-sticky navbar-light bg-light" style="z-index:500;">
         @Html.ActionLink("Universal Probiotics", "Index", "Home", new { @class = "navbar-brand" })
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,10 +29,10 @@
                     @Html.ActionLink("About Us", "About", "Home", new { @class = "nav-link" })
                 </li>
 
-                <li class="nav-item dropdown" style="z-index:999;">
-                    <a class="nav-link dropdown-toggle" style="z-index:999;" href="#" id="navbarDrop" data-toggle="dropdown">Products</a>
-                    <div class="dropdown-menu " style="z-index:999;">
-                        @Html.ActionLink("Dogs", "ViewSingleProduct", "Home", new { id = 1 }, new { @class = "dropdown-item" })
+                <li class="nav-item dropdown " style="z-index:999; position:relative; overflow:visible;">
+                    <a class="nav-link dropdown-toggle" style="z-index:999;" href="#" id="navbarDrop" data-toggle="dropdown" aria-haspopup="true">Products</a>
+                    <div class="dropdown-menu" style="z-index:1000; overflow:visible;  right:0; left:auto;">
+                        @Html.ActionLink("Dogs", "ViewSingleProduct", "Home", new { id = 1 }, new { @class = "dropdown-item", @style="z-index:1000; overflow: visible; position:relative;"})
                         @Html.ActionLink("Cats", "ViewSingleProduct", "Home", new { id = 2 }, new { @class = "dropdown-item" })
                         @Html.ActionLink("Goats", "ViewSingleProduct", "Home", new { id = 3 }, new { @class = "dropdown-item" })
                         @Html.ActionLink("Horses", "ViewSingleProduct", "Home", new { id = 4 }, new { @class = "dropdown-item" })
@@ -45,8 +45,7 @@
                 </li>
             </ul>
             <form class="form-inline">
-                <button class="btn btn-sm btn-outline-secondary mx-2" type="button">Cart</button>
-                <button class="btn btn-sm btn-outline-secondary" type="button">Login</button>
+                @Html.ActionLink("Cart", "ViewCart", "Home", null, new { @class = "btn btn-sm btn-outline-secondary" })
             </form>
         </div>
     </nav>
